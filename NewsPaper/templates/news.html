@@ -1,0 +1,47 @@
+
+{% extends 'flatpages/default.html' %} 
+
+
+
+{% block title %}
+News list
+{% endblock title %}
+ 
+
+{% block content %}
+    <h1>Новости! Всего - {{ news|length }} шт.</h1>
+    <br>
+    <hr>
+    {% if news  %} 
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Дата публикации
+                </td>
+                <td>
+                    Краткий текст
+                </td>
+                
+            </tr>
+        {% for directNews in news %} 
+            <tr>
+                <td>
+                    {{ directNews.head_of_post }} 
+                </td>
+                <td>
+                    {{  directNews.post_date_created|date:'d M Y'  }}
+                </td>
+                <td>
+                    {{ directNews.article_text|truncatechars:50 }}
+                </td>
+                <br>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2> Новостей нет!</h2>
+    {% endif %}
+{% endblock content %}
